@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Xcalendar::VERSION
   spec.authors       = ["Bruno Bonamin"]
   spec.email         = ["bruno@bonamin.org"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = "Cross Country Soaring calendar builder"
+  spec.summary       = "XCalendar takes a list of pilots and builds a calendar of iterations with two pilots per weekend day and holiday"
   spec.homepage      = ""
   spec.license       = "MIT"
 
