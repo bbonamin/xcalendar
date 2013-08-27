@@ -2,7 +2,7 @@ require 'pry'
 
 module XCalendar
   class Week
-    attr_accessor :beginning, :end
+    attr_accessor :beginning, :ending
     def initialize(covering: raise(ArgumentError, 'Date to create week is required'))
       date= if covering.is_a? Date
               covering
@@ -22,7 +22,26 @@ module XCalendar
       (7-current_date.wday).times do
         current_date = current_date.next_day
       end
-      self.end = current_date
+      self.ending = current_date
     end
+
+    def includes?(date)
+      date= if date.is_a? Date
+              date
+            else
+              Date.parse(date)
+            end
+      (beginning..ending).cover? date      
+    end
+
+    def flyable_days
+      (beginning..ending).select{ |date| date.saturday? or date.sunday? or date.holiday?}
+    end
+  end
+end
+
+class Date
+  def holiday?
+    XCalendar::HOLIDAYS.include? self.to_s 
   end
 end
