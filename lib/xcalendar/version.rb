@@ -1,3 +1,3 @@
-module Xcalendar
+module XCalendar
   VERSION = "0.0.1"
 end

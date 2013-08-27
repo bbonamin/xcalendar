@@ -5,7 +5,7 @@ require 'xcalendar/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "xcalendar"
-  spec.version       = Xcalendar::VERSION
+  spec.version       = XCalendar::VERSION
   spec.authors       = ["Bruno Bonamin"]
   spec.email         = ["bruno@bonamin.org"]
   spec.description   = "Cross Country Soaring calendar builder"
@@ -18,7 +18,6 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'active_support'
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
