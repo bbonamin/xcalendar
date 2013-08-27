@@ -20,8 +20,8 @@ module XCalendar
       end
 
       def build_flight_dates_for_pilots(pilots: raise(ArgumentError), week: raise(ArgumentError))
-        week.each_flyable_day do
-          flight_dates << pilots.shift(rand(0,pilots.length))
+        week.flyable_days.each do
+          flight_dates << pilots.shift(rand(pilots.length))
         end
       end
   end
