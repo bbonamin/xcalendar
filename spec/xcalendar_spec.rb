@@ -1,11 +1,10 @@
-require 'rubygems'
-require 'bundler'
-Bundler.require(:default)
+require 'spec_helper'
 
 module XCalendar
   describe 'XCalendar' do
     it 'assigns two pilots per date' do
       iteration = Iteration.new(start_date: '2013-09-07')
+      iteration.create
       flight_date = iteration.flight_dates.first
       expect(flight_date.pilots.count).to eq(2)
       expect(XCalendar::PILOTS).to include(flight_date.pilots.first)
