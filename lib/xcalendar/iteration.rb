@@ -2,11 +2,17 @@ module XCalendar
   class Iteration
     attr_accessor :flight_dates, :last_date
 
-    def initialize(start_date: raise(ArgumentError, 'Start date is required'))
+    def initialize( start_date: raise(ArgumentError, 'Start date is required'), end_date: raise(ArgumentError, 'End date is required'))
+
       @start_date = if start_date.is_a? Date
               start_date
             else
               Date.parse(start_date)
+            end
+      @end_date = if end_date.is_a? Date
+              end_date
+            else
+              Date.parse(end_date)
             end
       create
     end
@@ -29,9 +35,11 @@ module XCalendar
 
       def build_flight_dates_for_pilots(week: raise(ArgumentError))
         week.flyable_days.each do |day|
-          flight_dates[day] = []
-          @iteration_pilots = @iteration_pilots.shuffle
-          2.times { flight_dates[day] << @iteration_pilots.slice!(0) }
+          if day <= @end_date
+            flight_dates[day] = []
+            @iteration_pilots = @iteration_pilots.shuffle
+            2.times { flight_dates[day] << @iteration_pilots.slice!(0) }
+          end
         end
       end
   end
