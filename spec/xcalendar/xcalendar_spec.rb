@@ -10,9 +10,11 @@ module XCalendar
       expect(XCalendar::PILOTS).to include(flight_date.last.first)
       expect(XCalendar::PILOTS).to include(flight_date.last.last)
     end
-    it 'assigns pilots to weekend dates' 
-    it 'assigns pilots to holiday dates'
-    it 'does not repeat a pilot in the same interation'
+    it 'never has a nil pilot in a flight_date' do
+      nil_pilots_count = calendar.iterations.map(&:flight_dates).flatten.map(&:values).flatten.select{ |pilot| pilot.nil? }.count
+      expect(nil_pilots_count).to be_zero  
+    end
+    it 'does not repeat a pilot in the same iteration'
     it 'does not repeat a pilot ending an iteration and starting the next one'
     it 'starts on the start date' do
       expect(calendar.iterations.first.flight_dates.keys.first).to eq(Date.parse('2013-09-07'))
