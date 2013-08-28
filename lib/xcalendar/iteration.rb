@@ -29,7 +29,7 @@ module XCalendar
         flyable_days.each do |day|
           if not(@pilots.empty?) and day <= @end_date
             flight_dates[day] = []
-            if first
+            if last_pilots && (day - @start_date < 2)
               @pilots = (@pilots - last_pilots).shuffle + last_pilots
               first = false
             else
@@ -38,7 +38,6 @@ module XCalendar
             2.times { flight_dates[day] << @pilots.slice!(0) }
           end
         end
-#        binding.pry if last_pilots == flight_dates.values.last
         self.last_date = flight_dates.keys.last
         self.last_pilots = flight_dates.values.last
         self
