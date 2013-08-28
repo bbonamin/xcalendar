@@ -38,7 +38,7 @@ module XCalendar
             2.times { flight_dates[day] << @pilots.slice!(0) }
           end
         end
-        self.last_date = flight_dates.keys.last
+        self.last_date = flight_dates.keys.last + 1
         self.last_pilots = flight_dates.values.last
         self
       end
