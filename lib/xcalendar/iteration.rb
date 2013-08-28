@@ -23,24 +23,22 @@ module XCalendar
 
     private
       def create
-        @iteration_pilots = XCalendar::PILOTS.dup
-        week = Week.new(covering: @start_date)
-        while not(@iteration_pilots.empty?) do
-          build_flight_dates_for_pilots(week: week)
-          week.advance!
+        @pilots = XCalendar::PILOTS.dup
+        flyable_days.each do |day|
+          if not(@pilots.empty?)
+            if day <= @end_date
+              flight_dates[day] = []
+              @pilots = @pilots.shuffle
+              2.times { flight_dates[day] << @pilots.slice!(0) }
+            end
+          end
         end
         self.last_date = flight_dates.keys.last
         self
       end
 
-      def build_flight_dates_for_pilots(week: raise(ArgumentError))
-        week.flyable_days.each do |day|
-          if day <= @end_date
-            flight_dates[day] = []
-            @iteration_pilots = @iteration_pilots.shuffle
-            2.times { flight_dates[day] << @iteration_pilots.slice!(0) }
-          end
-        end
+      def flyable_days
+        (@start_date..@end_date).select{ |date| date.saturday? or date.sunday? or date.holiday?}
       end
   end
 end
