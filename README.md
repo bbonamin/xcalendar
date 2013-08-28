@@ -1,4 +1,4 @@
-# Xcalendar
+# XCalendar
 
 Cross Country Soaring calendar builder, used to assign pilots to available club gliders (2 in this case), in a custom date range.
 
