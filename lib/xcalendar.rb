@@ -36,10 +36,12 @@ module XCalendar
 
     def create
       last_date = start_date
+      last_pilots = []
       while last_date < end_date do
-        iteration = XCalendar::Iteration.new(start_date: last_date, end_date: end_date) 
+        iteration = XCalendar::Iteration.new(start_date: last_date, end_date: end_date, last_pilots: last_pilots) 
         last_date = iteration.last_date
         self.iterations << iteration
+        last_pilots = iteration.last_pilots
       end
     end
   end
