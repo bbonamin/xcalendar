@@ -44,5 +44,28 @@ module XCalendar
       holiday = Date.parse(XCalendar::HOLIDAYS.first)
       expect(week.flyable_days).to include(holiday)
     end
+
+    describe '#advance' do
+      it 'changes the beginning and ending dates' do
+        beginning = week.beginning
+        ending = week.ending
+        week.advance!
+
+        expect(week.beginning).to_not eq(beginning)
+        expect(week.ending).to_not eq(ending)
+        expect(week.ending).to_not eq(ending)
+      end
+
+      it 'is exactly 7 days after' do
+        beginning = week.beginning
+        ending = week.ending
+        week.advance!
+        beginning_difference_in_days = (week.beginning - beginning).to_i
+        ending_difference_in_days = (week.ending - ending).to_i
+
+        expect(beginning_difference_in_days).to eq(7)
+        expect(ending_difference_in_days).to eq(7)
+      end
+    end
   end
 end
