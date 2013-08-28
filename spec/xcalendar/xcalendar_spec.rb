@@ -14,7 +14,12 @@ module XCalendar
       nil_pilots_count = calendar.iterations.map(&:flight_dates).flatten.map(&:values).flatten.select{ |pilot| pilot.nil? }.count
       expect(nil_pilots_count).to be_zero  
     end
-    it 'does not repeat a pilot in the same iteration'
+    it 'does not repeat a pilot in the same iteration' do
+      pilots_in_first_iteration = calendar.iterations.first.flight_dates.values.flatten
+      pilots_in_last_iteration = calendar.iterations.last.flight_dates.values.flatten
+      expect(pilots_in_first_iteration.count).to eq(pilots_in_first_iteration.uniq.count)
+      expect(pilots_in_last_iteration.count).to eq(pilots_in_last_iteration.uniq.count)
+    end
     it 'does not repeat a pilot ending an iteration and starting the next one'
     it 'starts on the start date' do
       expect(calendar.iterations.first.flight_dates.keys.first).to eq(Date.parse('2013-09-07'))
