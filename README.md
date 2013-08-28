@@ -1,24 +1,15 @@
 # Xcalendar
 
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'xcalendar'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install xcalendar
+Cross Country Soaring calendar builder, used to assign pilots to available club gliders (2 in this case), in a custom date range.
 
 ## Usage
 
-TODO: Write usage instructions here
+1. Create the calendar & export the results to a CSV file.
+
+```ruby
+calendar = XCalendar::Calendar.new(start_date: '2013-09-07', end_date: '2014-04-06')
+calendar.export_to_csv 
+```
 
 ## Contributing
 
