@@ -33,5 +33,9 @@ module XCalendar
     it 'ends on the end date' do
       expect(calendar.iterations.last.flight_dates.keys.last).to eq(Date.parse('2014-04-06'))
     end
+
+    it 'exports the output to CSV' do
+      expect(calendar.export_to_csv).to_not raise_error
+    end
   end
 end

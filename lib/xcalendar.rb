@@ -1,17 +1,17 @@
 require "xcalendar/version"
 require "xcalendar/iteration"
 require "xcalendar/core_extensions"
-
+require 'csv'
 
 module XCalendar
-    PILOTS = ['Claudio Binimelis',
-              'Andrés boretti',
-              'Pablo Codoni',
-              'Ezequiel Gauna',
-              'David Luna',
-              'Nico Verdura',
-              'Bruno Bonamin',
-              'Seba Nicola' ]
+    PILOTS = ['Claudio B.',
+              'Andrés B.',
+              'Pablo C.',
+              'Ezequiel G.',
+              'David L.',
+              'Nico V.',
+              'Bruno B.',
+              'Sebastián N.' ]
 
     HOLIDAYS = ['2013-10-14',
                 '2013-11-25',
@@ -42,6 +42,19 @@ module XCalendar
         last_date = iteration.last_date
         self.iterations << iteration
         last_pilots = iteration.last_pilots
+      end
+    end
+
+    def export_to_csv(file:'iteraciones.csv')
+      CSV.open(file, 'w') do |csv|
+        csv << ['Rotación de vuelos 2013']
+        csv << %w( Número Fecha Pilotos)
+
+        self.iterations.each_with_index do |iteration, index|
+          iteration.flight_dates.each do |date, pilots|
+            csv << [index+1, date.strftime("%d/%m/%Y"), pilots.join(', ')]
+          end
+        end
       end
     end
   end
