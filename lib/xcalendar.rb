@@ -1,6 +1,6 @@
 require "xcalendar/version"
-require "xcalendar/week"
 require "xcalendar/iteration"
+require "xcalendar/core_extensions"
 
 
 module XCalendar
