@@ -21,12 +21,24 @@ module XCalendar
       expect(pilots_in_last_iteration.count).to eq(pilots_in_last_iteration.uniq.count)
     end
     it 'does not repeat a pilot ending an iteration and starting the next one' do
-      iteration_a = calendar.iterations[0]
-      iteration_a_last_pilots = iteration_a.last_pilots
-      iteration_b = calendar.iterations[1]
-      iteration_b_last_pilots = iteration_b.last_pilots
-      expect(iteration_a_last_pilots & iteration_b_last_pilots).to be_empty
+      calendar.iterations.each_with_index do |iteration, index|
+        if not(iteration == calendar.iterations.last)
+          next_iteration_first_pilots = calendar.iterations[index+1].flight_dates.values.first
+          expect(iteration.last_pilots & next_iteration_first_pilots).to be_empty
+        end
+      end
     end
+
+    it 'contains all pilots in each iteration except the last' do
+      def except_last(array)
+        array.reverse.drop(1).reverse
+      end
+      pilots_per_iteration = calendar.iterations.map(&:flight_dates).flatten.map(&:values).map(&:flatten)
+      except_last(pilots_per_iteration).each do |pilots|
+        expect(pilots.uniq.count).to eq(8)
+      end
+    end
+
     it 'starts on the start date' do
       expect(calendar.iterations.first.flight_dates.keys.first).to eq(Date.parse('2013-09-07'))
     end

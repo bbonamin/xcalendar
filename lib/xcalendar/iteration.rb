@@ -27,19 +27,18 @@ module XCalendar
         @pilots = XCalendar::PILOTS.dup
         first = true
         flyable_days.each do |day|
-          if not(@pilots.empty?)
-            if day <= @end_date
-              flight_dates[day] = []
-              if first
-                @pilots = (@pilots - last_pilots).shuffle
-                first = false
-              else
-                @pilots = @pilots.shuffle
-              end
-              2.times { flight_dates[day] << @pilots.slice!(0) }
+          if not(@pilots.empty?) and day <= @end_date
+            flight_dates[day] = []
+            if first
+              @pilots = (@pilots - last_pilots).shuffle + last_pilots
+              first = false
+            else
+              @pilots = @pilots.shuffle
             end
+            2.times { flight_dates[day] << @pilots.slice!(0) }
           end
         end
+#        binding.pry if last_pilots == flight_dates.values.last
         self.last_date = flight_dates.keys.last
         self.last_pilots = flight_dates.values.last
         self

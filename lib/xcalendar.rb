@@ -47,7 +47,6 @@ module XCalendar
 
     def export_to_csv(file:'iteraciones.csv')
       CSV.open(file, 'w') do |csv|
-        csv << ['Rotación de vuelos 2013']
         csv << %w( Número Fecha Pilotos)
 
         self.iterations.each_with_index do |iteration, index|
