@@ -42,17 +42,10 @@ module XCalendar
       self.beginning = beginning + 7
       self.ending = ending + 7
     end
-
-    def within?(start_date, end_date)
-      beginning_week = XCalendar::Week.new(covering: start_date)
-      ending_week = XCalendar::Week.new(covering: end_date)
-
-      beginning >= beginning_week.beginning and ending <= ending_week.ending
-    end
   end
 end
 
-class Date
+Date.class_eval do
   def holiday?
     XCalendar::HOLIDAYS.include? self.to_s 
   end
