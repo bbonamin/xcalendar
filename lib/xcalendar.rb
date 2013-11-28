@@ -7,17 +7,10 @@ module XCalendar
     PILOTS = ['Claudio B.',
               'Andrés B.',
               'Pablo C.',
-              'Ezequiel G.',
-              'David L.',
               'Nico V.',
-              'Bruno B.',
-              'Sebastián N.' ]
+              'Bruno B.' ]
 
-    HOLIDAYS = ['2013-10-14',
-                '2013-11-25',
-                '2013-12-08',
-                '2013-12-25',
-                '2014-01-01',
+    HOLIDAYS = ['2014-01-01',
                 '2014-03-03',
                 '2014-03-04',
                 '2014-03-24']

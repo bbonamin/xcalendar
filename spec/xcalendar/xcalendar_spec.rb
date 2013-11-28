@@ -3,7 +3,7 @@ require 'pry'
 
 module XCalendar
   describe 'XCalendar' do
-    let(:calendar) { XCalendar::Calendar.new(start_date: '2013-09-07', end_date: '2014-04-06') }
+    let(:calendar) { XCalendar::Calendar.new(start_date: '2013-11-30', end_date: '2014-04-06') }
     it 'assigns two pilots per date' do
       flight_date = calendar.iterations.first.flight_dates.first
       expect(flight_date.last.count).to eq(2)
