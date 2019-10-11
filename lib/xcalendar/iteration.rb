@@ -26,6 +26,7 @@ module XCalendar
       def create
         @pilots = XCalendar::PILOTS.dup
         first = true
+        # TODO fix issue when flyable_days is empty because there are not any remaining days between the last weeks.
         flyable_days.each do |day|
           if not(@pilots.empty?) and day <= @end_date
             flight_dates[day] = []

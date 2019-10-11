@@ -1,24 +1,33 @@
+require 'date'
+
 require "xcalendar/version"
 require "xcalendar/iteration"
 require "xcalendar/core_extensions"
 require 'csv'
 
 module XCalendar
-    PILOTS = ['Claudio B.',
-              'Andrés B.',
-              'Pablo C.',
-              'Nico V.',
-              'Bruno B.' ]
+    PILOTS = [
+      'Manso',
+      'Osella',
+      'Lage',
+      'Terre',
+      'Nicola',
+      'Alvarez'
+    ]
 
-    HOLIDAYS = ['2014-01-01',
-                '2014-03-03',
-                '2014-03-04',
-                '2014-03-24']
+    HOLIDAYS = [
+      '2019-10-18',
+      '2019-12-08',
+      '2019-12-25',
+      '2020-01-01',
+      '2018-03-24'
+    ]
+
   class Calendar
     attr_accessor :iterations
     attr_accessor :start_date, :end_date
 
-    def initialize( start_date: raise(ArgumentError, 'Start date is required'), 
+    def initialize( start_date: raise(ArgumentError, 'Start date is required'),
                     end_date: raise(ArgumentError, 'End date is required'))
       self.iterations ||= []
       self.start_date = Date.parse(start_date)
@@ -31,7 +40,7 @@ module XCalendar
       last_date = start_date
       last_pilots = []
       while last_date < end_date do
-        iteration = XCalendar::Iteration.new(start_date: last_date, end_date: end_date, last_pilots: last_pilots) 
+        iteration = XCalendar::Iteration.new(start_date: last_date, end_date: end_date, last_pilots: last_pilots)
         last_date = iteration.last_date
         self.iterations << iteration
         last_pilots = iteration.last_pilots
